@@ -1,19 +1,16 @@
+import { getAllUsers, postUsers } from "./src/api";
 const cors = require("cors");
 const dotenv = require("dotenv");
 const express = require("express");
-const mysql = require("mysql2");
-import { getAllUsers, postUsers } from "./src/api";
-
-// Charger les variables d'environnement
+const mongoose = require("mongoose");
+const User = require("./model/user");
 dotenv.config();
 
-// Créer une connexion à la base de données avec les variables d'environnement
-export const pool = mysql.createPool({
-  user: process.env.MYSQL_USER!,
-  password: process.env.MYSQL_ROOT_PASSWORD!,
-  database: process.env.MYSQL_DATABASE!,
-  host: process.env.MYSQL_HOST!,
-});
+const mongoDB = process.env.MONGODB_URL;
+main().catch((err) => console.log(err));
+async function main() {
+  await mongoose.connect(mongoDB);
+}
 
 // Configurer le routeur Express
 const router = express.Router();

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { pool } from "../server";
-
+// import { pool } from "../server";
+const Users = require("../model/user");
 /**
  * Retrieves all users from the database.
  * @param {Response} res - The response object.
@@ -10,10 +10,9 @@ export const getAllUsers = async (
   _: Request,
   res: Response
 ): Promise<Response> => {
-  const sql = "SELECT * FROM users";
   try {
-    const [rows] = await pool.query(sql);
-    return res.status(200).json({ users: rows, success: true });
+    const users = await Users.find({});
+    return res.status(200).json({ users, success: true });
   } catch (error) {
     return res.status(500).json({
       message: "Error fetching users: " + (error as Error).message,
@@ -34,17 +33,16 @@ export const postUsers = async (
   res: Response
 ): Promise<Response> => {
   const { firstName, lastName, email, birthDate, city, zipCode } = req.body;
-  const sql =
-    "INSERT INTO users (firstName, lastName, email, birthDate, city, zipCode) VALUES (?, ?, ?, ?, ?, ?)";
   try {
-    await pool.query(sql, [
+    Users.create({
       firstName,
       lastName,
       email,
       birthDate,
       city,
       zipCode,
-    ]);
+    });
+
     return res.status(201).json({ message: "User created", success: true });
   } catch (error) {
     return res.status(500).json({
