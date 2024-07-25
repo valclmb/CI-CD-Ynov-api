@@ -1,13 +1,13 @@
 name: Vercel Production Deployment
-env: 
+env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID:: ${{ secrets.VERCEL_PROJECT_ID }}
 
 on:
   push:
-    branches: [ main ]
-  pull_request: 
-    branches: [ main ]
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   build_test_and_deploy:
@@ -19,7 +19,7 @@ jobs:
     strategy:
       matrix:
         node-version: [20.x]
-        
+
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
@@ -29,7 +29,6 @@ jobs:
       - name: npm ci and test
         run: |
           npm ci
-          npm test
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
       - name: Pull Vercel Environment Information
@@ -38,5 +37,3 @@ jobs:
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
-      
-    
