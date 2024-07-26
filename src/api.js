@@ -1,15 +1,6 @@
-import { Request, Response } from "express";
-// import { pool } from "../server";
 const Users = require("../model/user");
-/**
- * Retrieves all users from the database.
- * @param {Response} res - The response object.
- * @returns {Promise<Response>} The response object with the users data.
- */
-export const getAllUsers = async (
-  _: Request,
-  res: Response
-): Promise<Response> => {
+
+const getAllUsers = async (_, res) => {
   try {
     const users = await Users.find({});
 
@@ -19,7 +10,7 @@ export const getAllUsers = async (
     return res.status(200).json({ users, success: true });
   } catch (error) {
     return res.status(500).json({
-      message: "Error fetching users: " + (error as Error).message,
+      message: "Error fetching users: " + error.message,
       success: false,
     });
   }
@@ -28,14 +19,11 @@ export const getAllUsers = async (
 /**
  * Create a new user.
  *
- * @param {Request} req - The request object.
- * @param {Response} res - The response object.
- * @returns {Promise<Response>} The response object with status and message.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns {Object} The response object with status and message.
  */
-export const postUsers = async (
-  req: Request,
-  res: Response
-): Promise<Response> => {
+const postUsers = async (req, res) => {
   const { firstName, lastName, email, birthDate, city, zipCode } = req.body;
   try {
     Users.create({
@@ -50,8 +38,10 @@ export const postUsers = async (
     return res.status(201).json({ message: "User created", success: true });
   } catch (error) {
     return res.status(500).json({
-      message: "Error creating user: " + (error as Error).message,
+      message: "Error creating user: " + error.message,
       success: false,
     });
   }
 };
+
+module.exports = { getAllUsers, postUsers };

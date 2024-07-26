@@ -4,10 +4,7 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
-    "test": "jest ",
-    "build": "tsc",
-    "start": "npm run build && node dist/server.js",
-    "typedoc": "typedoc --out docs/"
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",

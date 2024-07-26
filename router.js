@@ -1,9 +1,10 @@
-import { getAllUsers, postUsers } from "./src/api";
+const { getAllUsers, postUsers } = require("./src/api");
+
 const express = require("express");
 const cors = require("cors");
 
 // Créer une instance de l'application Express
-export const app = express();
+const app = express();
 
 // Options pour CORS
 const corsOptions = {
@@ -24,4 +25,4 @@ router.route("/").post(postUsers);
 
 app.use("/users", router);
 
-// module.exports = app;
+module.exports = app;

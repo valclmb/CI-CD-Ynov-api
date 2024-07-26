@@ -1,8 +1,8 @@
 const dotenv = require("dotenv");
 
 const mongoose = require("mongoose");
+const app = require("./router");
 
-import { app } from "./router";
 dotenv.config();
 
 const mongoDB = process.env.MONGODB_URL;
