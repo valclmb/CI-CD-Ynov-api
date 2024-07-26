@@ -8,7 +8,7 @@ const app = express();
 
 // Options pour CORS
 const corsOptions = {
-  origin: "http://localhost:5173",
+  origin: "*",
   optionsSuccessStatus: 200,
 };
 
