@@ -1,7 +1,7 @@
 const request = require("supertest");
 const mockingoose = require("mockingoose");
 const model = require("../model/user");
-import { app } from "../router";
+const app = require("../router");
 
 describe("GET /users", () => {
   test("responds with json", async () => {
@@ -24,7 +24,7 @@ describe("GET /users", () => {
   });
 
   test("responds with empty array", async () => {
-    const _doc: unknown = [];
+    const _doc = [];
 
     mockingoose(model).toReturn(_doc, "find");
 
