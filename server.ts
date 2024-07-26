@@ -13,5 +13,5 @@ async function main() {
 
 // Démarrer le serveur
 app.listen(8000, () => {
-  console.log("Server is running on port 8000");
+  console.log("Server is running on port 8000!");
 });
