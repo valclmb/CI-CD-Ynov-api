@@ -12,6 +12,10 @@ export const getAllUsers = async (
 ): Promise<Response> => {
   try {
     const users = await Users.find({});
+
+    if (users.length === 0) {
+      return res.status(404).json({ users: [], success: true });
+    }
     return res.status(200).json({ users, success: true });
   } catch (error) {
     return res.status(500).json({
