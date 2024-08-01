@@ -1,0 +1,19 @@
+services:
+  mongo_db:
+    image: mongo
+    restart: always
+  server:
+    image: nodejs
+    volumes:
+      - .:/server
+      - /server/node_modules
+    build: .
+    restart: always
+    ports:
+      - 8000:8000
+    environment:
+      - MONGODB_URL
+      - FRONT_URL
+    depends_on:
+      - mongo_db
+    command: node server.js
