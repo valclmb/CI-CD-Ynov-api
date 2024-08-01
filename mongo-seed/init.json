@@ -1,0 +1,18 @@
+[
+  {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "johndoe@email.com",
+    "zipCode": "12345",
+    "city": "New York",
+    "birthDate": "1990-01-01"
+  },
+  {
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "email": "janedoe@email.com",
+    "zipCode": "12345",
+    "city": "New York",
+    "birthDate": "1990-01-01"
+  }
+]
