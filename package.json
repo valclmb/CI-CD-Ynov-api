@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "cypress": "cypress open"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +18,7 @@
     "mysql2": "^3.10.2"
   },
   "devDependencies": {
+    "cypress": "^13.13.2",
     "mockingoose": "^2.16.2",
     "supertest": "^7.0.0",
     "typedoc": "^0.26.5"
