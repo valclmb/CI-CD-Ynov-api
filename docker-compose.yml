@@ -2,6 +2,7 @@ services:
   mongo_db:
     image: mongo
     restart: always
+
   server:
     image: nodejs
     volumes:
@@ -18,6 +19,7 @@ services:
       - mongo_db
     command: node server.js
   mongo_seed:
-    build: ./mongo-seed
-    links:
-      - mongo_db
+    image: mongo
+    volumes:
+      - ./mongo-seed:/mongo-seed
+    command: mongoimport --host mongo_db --db mydb --collection users --type json --file /mongo-seed/init.json --jsonArray
