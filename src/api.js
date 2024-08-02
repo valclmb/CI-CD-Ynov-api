@@ -25,8 +25,16 @@ const getAllUsers = async (_, res) => {
  */
 const postUsers = async (req, res) => {
   const { firstName, lastName, email, birthDate, city, zipCode } = req.body;
+
+  if (!firstName || !lastName || !email || !birthDate || !city || !zipCode) {
+    return res.status(400).json({
+      message: "Please provide all required fields",
+      success: false,
+    });
+  }
+
   try {
-    Users.create({
+    const user = new Users({
       firstName,
       lastName,
       email,
@@ -34,11 +42,12 @@ const postUsers = async (req, res) => {
       city,
       zipCode,
     });
+    await user.save();
 
     return res.status(201).json({ message: "User created", success: true });
   } catch (error) {
     return res.status(500).json({
-      message: "Error creating user: " + error.message,
+      message: error.message,
       success: false,
     });
   }
