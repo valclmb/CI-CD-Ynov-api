@@ -1,5 +1,3 @@
-const { postUsers } = require("../../src/api");
-
 describe("GET /users", () => {
   it("gets a list of users", () => {
     cy.request("GET", "/users").then((response) => {
